@@ -5,6 +5,7 @@
 ## Cách ghi nhớ
 - Ghi nối, mẫu: `- YYYY-MM-DD · [bối cảnh] · nội dung · nguồn`.
 - `quyet-dinh.md`: quyết định cấu trúc/kỹ thuật/ văn bản áp dụng · `bai-hoc.md`: bài học thẩm định, sai sót tri thức · `du-an/<mã>.md`: quyết định & giả định đã xác nhận của từng dự án.
+- Tiến độ & cách tiếp tục: `pccc/TIEN_DO.md` · lịch sử phiên làm việc: `lich-su-lam-viec.md`.
 - Không ghi bí mật, dữ liệu cá nhân. Các file nhật ký dùng `merge=union` → hợp nhất không xung đột.
 
 ## Ghi nhớ ghim (đọc trước khi làm việc)
