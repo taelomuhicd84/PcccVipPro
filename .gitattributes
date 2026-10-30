@@ -1,5 +1,6 @@
 # --- Chung (host) ---
-* text=auto
+# Cố ý KHÔNG đặt quy tắc toàn cục (vd "* text=auto") để khi hợp nhất không làm đổi kiểu xuống dòng
+# của file thuộc dự án khác. Quy tắc riêng của từng module nằm trong khối của module đó.
 
 # pccc:begin · module pccc v1.0.0 · quản lý bởi pccc/integration/pccc_merge.py
 pccc/** text=auto eol=lf
