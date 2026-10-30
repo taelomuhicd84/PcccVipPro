@@ -1,6 +1,6 @@
 # TIẾN ĐỘ — module PCCC (file trạng thái để tiếp tục công việc ở phiên sau)
 
-Cập nhật lần cuối: 2026-10-31 01:40 (giờ VN, UTC+7)
+Cập nhật lần cuối: 2026-10-31 01:45 (giờ VN, UTC+7)
 
 ## Trạng thái hiện tại
 - v1.0.0 đã đẩy lên GitHub (nhánh `ccr-dbc199ae-iq9ypg`): cấu trúc đầy đủ, 13 skill, 6 agent, 4 hook, 14 file tri thức, 3 công cụ tính, hệ thống hợp nhất, 35 unittest, `pccc/so_do_note.html`.
@@ -13,10 +13,11 @@ Cập nhật lần cuối: 2026-10-31 01:40 (giờ VN, UTC+7)
 
 ## Nguồn tài liệu gốc
 - Thư mục Google Drive của người dùng: https://drive.google.com/drive/folders/1_oey78r7raKyiP9AGNm5XTj0dJ-FxCVs
-- Danh mục file đã tải/đối chiếu: `pccc/knowledge/nguon/DANH_MUC.md` (tạo khi tải được).
+- Danh mục & trạng thái: `pccc/knowledge/nguon/DANH_MUC.md`.
+- ⛔ 2026-10-31 01:40: **Drive bị chặn** bởi chính sách mạng của phiên cloud (`drive.google.com`). Người dùng cần thêm `drive.google.com`, `drive.usercontent.google.com`, `docs.google.com` vào *Allowed domains* (Network access của môi trường) hoặc gửi file trực tiếp trong chat. Hướng dẫn: https://code.claude.com/docs/en/cloud-environments#network-access
 
 ## Việc tiếp theo (theo thứ tự ưu tiên)
-1. Truy cập thư mục Drive, liệt kê và tải các văn bản PCCC (QCVN 06:2022 + SĐ1:2023, QCVN 10:2025/BCA, TCVN 7336:2021, TCVN 5738:2021, TCVN 5687:2024, TCVN 3890:2023, QCVN 13:2018, NĐ 105/2025…).
+1. (Chờ người dùng mở mạng) Truy cập thư mục Drive, liệt kê và tải các văn bản PCCC (QCVN 06:2022 + SĐ1:2023, QCVN 10:2025/BCA, TCVN 7336:2021, TCVN 5738:2021, TCVN 5687:2024, TCVN 3890:2023, QCVN 13:2018, NĐ 105/2025…).
 2. Trích văn bản (pdftotext / đọc trang PDF), đối chiếu từng số liệu `[DC]` trong `pccc/knowledge/*.md` và `pccc/tools/du_lieu_tham_chieu.json`.
 3. Sửa giá trị sai, nâng nhãn `[BG]` kèm trích dẫn (văn bản, mục, trang); cập nhật test nếu số liệu đổi.
 4. Tăng phiên bản (VERSION + manifest), chạy `pccc_merge.py sync`, `pccc_doctor.py --tests`, commit & push sau mỗi văn bản.

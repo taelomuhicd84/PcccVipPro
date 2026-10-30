@@ -8,3 +8,4 @@ Mẫu: `- YYYY-MM-DD HH:MM (giờ VN) · [yêu cầu|việc đã làm|commit|vư
 - 2026-10-31 01:30 · [commit] · 01ec2d5 — bỏ quy tắc `.gitattributes` toàn cục (tránh đổi CRLF→LF file của dự án khác khi gộp).
 - 2026-10-31 01:35 · [yêu cầu] · Người dùng đi ngủ: chạy tiếp tự động; gần hết usage thì lưu tiến độ + lịch sử và đẩy GitHub; hết usage 5 h thì chờ reset; dừng tuyệt đối trước 05:00 31/10/2026 (giờ VN). Cung cấp thư mục Drive tài liệu: https://drive.google.com/drive/folders/1_oey78r7raKyiP9AGNm5XTj0dJ-FxCVs
 - 2026-10-31 01:40 · [việc đã làm] · Tạo `pccc/TIEN_DO.md` và file lịch sử này.
+- 2026-10-31 01:45 · [vướng mắc] · Không truy cập được Google Drive (proxy 403 và công cụ tải web báo ngoài miền được phép). Đã ghi cách mở mạng vào `pccc/knowledge/nguon/DANH_MUC.md` và `pccc/TIEN_DO.md`; chuyển sang việc không phụ thuộc Drive: xác minh số liệu qua tìm kiếm web, công cụ đọc bản vẽ, CI.
