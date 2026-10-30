@@ -1,6 +1,6 @@
 # Thoát nạn — yêu cầu & thư viện phương án
 
-Cập nhật: 2026-10-30 · Căn cứ chính: QCVN 06:2022/BXD + SĐ1:2023, Chương 3 (3.2 lối ra thoát nạn & lối ra khẩn cấp; 3.3 đường thoát nạn; 3.4 cầu thang & buồng thang), Phụ lục A (nhà cao), Phụ lục G (khoảng cách thoát nạn). Công cụ: `pccc/tools/thoat_nan.py`.
+Cập nhật: 2026-10-31 · Căn cứ chính: QCVN 06:2022/BXD + SĐ1:2023, Chương 3 (3.2 lối ra thoát nạn & lối ra khẩn cấp; 3.3 đường thoát nạn; 3.4 cầu thang & buồng thang), Phụ lục A (nhà cao), Phụ lục G (khoảng cách thoát nạn). Công cụ: `pccc/tools/thoat_nan.py`.
 
 ## 1. Khái niệm cần phân biệt
 - **Lối ra thoát nạn**: dẫn ra ngoài trực tiếp, vào buồng thang bộ/thang bộ loại 3, vào hành lang/sảnh dẫn tới các lối đó, hoặc sang gian phòng/khoang cháy lân cận theo điều kiện quy chuẩn [DC].
@@ -23,9 +23,9 @@ Cập nhật: 2026-10-30 · Căn cứ chính: QCVN 06:2022/BXD + SĐ1:2023, Chư
 ### 2.3 Kích thước
 | Bộ phận | Yêu cầu tham khảo | Nhãn |
 |---|---|---|
-| Cửa lối ra thoát nạn | cao thông thủy ≥ 1,9 m; rộng ≥ 0,8 m (lớn hơn với gian phòng F1.1 đông người, cửa ra từ buồng thang ≥ bề rộng bản thang) | [DC] |
+| Cửa lối ra thoát nạn | cao thông thủy ≥ 1,9 m; rộng ≥ 0,8 m [TC — báo chí trích QCVN 06]; lớn hơn với gian phòng F1.1 đông người, cửa ra từ buồng thang ≥ bề rộng bản thang [DC] | [TC]/[DC] |
 | Hành lang (phần nằm ngang) | rộng ≥ 1,2 m khi dùng cho > 15 người từ gian phòng F1 hoặc > 50 người từ nhóm khác; ≥ 0,7 m lối đi tới chỗ làm việc đơn lẻ; ≥ 1,0 m các trường hợp khác; cao thông thủy ≥ 2 m | [DC] |
-| Bản thang | ≥ 1,35 m (nhà F1.1); ≥ 1,2 m (nhà có > 200 người trên tầng bất kỳ trừ tầng 1); ≥ 0,7 m (tới chỗ làm việc đơn lẻ); ≥ 0,9 m (còn lại); không nhỏ hơn bề rộng cửa trên đường thoát | [DC] |
+| Bản thang | Không nhỏ hơn chiều rộng tính toán hoặc chiều rộng bất kỳ lối ra thoát nạn nào trên nó [TC]. Nhà F1.1 theo SĐ1:2023: ≥ 1,2 m khi > 15 người/tầng thoát qua thang, ≥ 1,0 m khi ≤ 15 người [TC — trang tổng hợp TT 09/2023]. Giá trị khác (≥ 1,2 m khi > 200 người/tầng; ≥ 0,9 m còn lại; ≥ 0,7 m tới chỗ làm việc đơn lẻ; 1,35 m cho phòng khán giả > 200 người) [DC] | [TC]/[DC] |
 | Bậc thang / độ dốc | mặt bậc ≥ 25 cm, chiều cao bậc ≤ 22 cm, độ dốc ≤ 1:1 (thang trong nhà) | [DC] |
 | Khe hở giữa các vế thang | ≥ 75 mm (phục vụ kéo vòi chữa cháy) | [DC] |
 | Tổng bề rộng theo số người | theo bảng/khả năng thông qua của QCVN 06 (theo nhóm, bậc chịu lửa, khối tích); kiểm tra chéo NFPA 101: 7,6 mm/người (thang), 5,1 mm/người (mặt bằng) | [DC] / [QT] |
@@ -35,7 +35,7 @@ Cập nhật: 2026-10-30 · Căn cứ chính: QCVN 06:2022/BXD + SĐ1:2023, Chư
 - Nhà thuộc Phụ lục A (cao): cửa căn hộ trên hành lang cụt → ≤ **15 m** tới lối ra gần nhất (A.2.19) [TC].
 - Nhóm khác: các bảng G.2… theo nhóm, bậc chịu lửa, khối tích gian phòng, mật độ dòng người (một số bảng phân biệt “đi vào hành lang cụt”) [DC].
 - Có/không tăng khoảng cách khi có chữa cháy tự động: chỉ áp dụng nếu chú thích bảng cho phép [DC].
-- Cách đo: theo đường đi thực tế (tim lối đi, vòng qua đồ đạc cố định), không đo chim bay. → `thoat_nan.py duong-di`.
+- Cách đo: theo **tim đường thoát nạn**, từ cửa gian phòng (hoặc điểm xa nhất có người) tới lối ra gần nhất [TC — SĐ1:2023 có sửa câu chữ phần đo]; vòng qua đồ đạc cố định, không đo chim bay. → `thoat_nan.py duong-di`.
 
 ### 2.5 Cửa trên đường thoát nạn [DC]
 - Mở theo hướng thoát nạn (trừ trường hợp quy chuẩn miễn, VD gian phòng ít người).

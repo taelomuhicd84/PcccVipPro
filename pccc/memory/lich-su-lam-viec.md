@@ -9,3 +9,5 @@ Mẫu: `- YYYY-MM-DD HH:MM (giờ VN) · [yêu cầu|việc đã làm|commit|vư
 - 2026-10-31 01:35 · [yêu cầu] · Người dùng đi ngủ: chạy tiếp tự động; gần hết usage thì lưu tiến độ + lịch sử và đẩy GitHub; hết usage 5 h thì chờ reset; dừng tuyệt đối trước 05:00 31/10/2026 (giờ VN). Cung cấp thư mục Drive tài liệu: https://drive.google.com/drive/folders/1_oey78r7raKyiP9AGNm5XTj0dJ-FxCVs
 - 2026-10-31 01:40 · [việc đã làm] · Tạo `pccc/TIEN_DO.md` và file lịch sử này.
 - 2026-10-31 01:45 · [vướng mắc] · Không truy cập được Google Drive (proxy 403 và công cụ tải web báo ngoài miền được phép). Đã ghi cách mở mạng vào `pccc/knowledge/nguon/DANH_MUC.md` và `pccc/TIEN_DO.md`; chuyển sang việc không phụ thuộc Drive: xác minh số liệu qua tìm kiếm web, công cụ đọc bản vẽ, CI.
+- 2026-10-31 01:50 · [việc đã làm] · Xác minh qua tìm kiếm web: lối ra 0,8 × 1,9 m, bản thang F1.1 theo SĐ1:2023, cách đo khoảng cách thoát nạn, tên TCVN 13456:2022 → nâng [TC]; Bảng G.1 & bề rộng hành lang chưa tìm được giá trị.
+- 2026-10-31 01:52 · [vướng mắc] · Chạm giới hạn usage 5 giờ (reset 20:00 UTC = 03:00 giờ VN). Lưu tiến độ, đẩy GitHub, hẹn tự chạy tiếp ~03:03 giờ VN; hạn chót tuyệt đối 05:00 giờ VN.

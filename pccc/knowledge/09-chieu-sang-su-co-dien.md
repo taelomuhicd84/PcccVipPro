@@ -1,6 +1,6 @@
 # Chiếu sáng sự cố, chỉ dẫn thoát nạn & cấp điện cho PCCC
 
-Cập nhật: 2026-10-30 · Căn cứ: QCVN 06:2022/BXD [DC], TCVN 13456:2022 (đèn sự cố & chỉ dẫn — kiểm tra số hiệu) [DC], QCVN 10:2025/BCA [TC — phạm vi], IEC 60331 / BS 6387 / BS 8491 (cáp chống cháy) [QT].
+Cập nhật: 2026-10-31 · Căn cứ: QCVN 06:2022/BXD [DC], TCVN 13456:2022 “PCCC — Chiếu sáng sự cố và chỉ dẫn thoát nạn — Yêu cầu thiết kế, lắp đặt” [TC — tên & số hiệu], QCVN 10:2025/BCA [TC — phạm vi], IEC 60331 / BS 6387 / BS 8491 (cáp chống cháy) [QT].
 
 ## 1. Chiếu sáng sự cố & đèn chỉ dẫn [DC]
 - Bố trí trên mọi đường thoát nạn: hành lang, buồng thang, sảnh, lối ra, chỗ đổi hướng/đổi cao độ, gần thiết bị PCCC (tủ họng nước, nút ấn, bình), phòng bơm, phòng điều khiển, trạm biến áp, phòng máy phát.

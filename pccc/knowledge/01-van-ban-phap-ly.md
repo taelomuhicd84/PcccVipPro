@@ -45,7 +45,7 @@ Cập nhật: 2026-10-30 · Nguồn rà soát: tra cứu web (trang luật, cổ
 | TCVN 2622:1995 | PCCC cho nhà & công trình — phần lớn đã được QCVN 06 thay thế; vẫn hay được viện dẫn cho cấp nước chữa cháy | [DC] |
 | TCVN 4513:1988 | Cấp nước bên trong — tiêu chuẩn thiết kế (có phần cấp nước chữa cháy trong nhà) | [DC] |
 | TCVN 13606:2023 | Cấp nước — mạng lưới đường ống và công trình (thay TCVN 33:2006; có nước chữa cháy đô thị) | [DC] |
-| TCVN 13456:2022 | Đèn chiếu sáng sự cố & đèn chỉ dẫn thoát nạn (kiểm tra lại số hiệu/tên) | [DC] |
+| TCVN 13456:2022 | PCCC — Chiếu sáng sự cố và chỉ dẫn thoát nạn — Yêu cầu thiết kế, lắp đặt | [TC] |
 | TCVN 7161 (bộ, theo ISO 14520) | Hệ thống chữa cháy bằng khí | [DC] |
 | TCVN 9311 (bộ, theo ISO 834) | Thử nghiệm chịu lửa cấu kiện | [DC] |
 
