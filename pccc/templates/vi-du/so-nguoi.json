@@ -1,0 +1,11 @@
+{
+  "ten": "VÍ DỤ — Số người tính toán tầng thương mại - văn phòng",
+  "thong_so": {
+    "khu": [
+      {"ten": "Văn phòng tầng 5", "dien_tich_m2": 820, "loai": "van_phong"},
+      {"ten": "Hội trường", "so_cho": 180},
+      {"ten": "Nhà hàng", "dien_tich_m2": 260, "m2_moi_nguoi": 1.4},
+      {"ten": "Kho", "so_nguoi": 4}
+    ]
+  }
+}

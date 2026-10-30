@@ -1,0 +1,17 @@
+{
+  "ten": "VÍ DỤ — Khoảng cách thoát nạn tầng điển hình chung cư (hành lang giữa, 2 buồng thang)",
+  "_ghi_chu": "Tọa độ (m) đo trên mặt bằng theo tim hành lang. 'cua': tên cửa -> nút hành lang [+ quãng từ cửa tới tim hành lang]. Giới hạn PHẢI tra QCVN 06:2022 Bảng G.1 theo bậc chịu lửa & cấp S (giá trị dưới là minh họa [DC]).",
+  "thong_so": {
+    "nut": {"T1": [0, 0], "A": [10, 0], "B": [20, 0], "C": [30, 0], "T2": [42, 0], "D": [50, 0], "E": [72, 0]},
+    "canh": [["T1", "A"], ["A", "B"], ["B", "C"], ["C", "T2"], ["T2", "D"], ["D", "E"]],
+    "loi_ra": ["T1", "T2"],
+    "cua": {"CH01": ["A", 1.5], "CH02": ["B", 1.5], "CH03": ["C", 1.5], "CH04": ["D", 1.5], "CH05": ["E", 1.5]},
+    "gioi_han": {"giua": 40, "cut": 25},
+    "nguon_gioi_han": "QCVN 06:2022/BXD Bảng G.1 — bậc I-II, S0 [DC] (minh họa, phải đối chiếu)"
+  },
+  "phuong_an": [
+    {"ma": "HT", "ten": "Hiện trạng thiết kế", "thay_doi": {}},
+    {"ma": "A", "ten": "Bổ sung buồng thang T3 ở đầu hồi (nút E)", "thay_doi": {"loi_ra_them": ["E"]}},
+    {"ma": "B", "ten": "Cửa ra thang ngoài nhà loại 3 tại D (rẻ hơn, ảnh hưởng mặt đứng)", "thay_doi": {"loi_ra_them": ["D"]}}
+  ]
+}

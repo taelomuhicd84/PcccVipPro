@@ -1,0 +1,33 @@
+{
+  "ten": "VÍ DỤ — Họng nước chữa cháy trong nhà, chung cư 20 tầng (so sánh cỡ trục đứng)",
+  "_ghi_chu": "Số tia & lưu lượng/tia PHẢI tra QCVN 10:2025/BCA (hoặc TCVN 3890:2023 Bảng B.1) cho đúng loại nhà. Số liệu dưới là minh họa.",
+  "thong_so": {
+    "so_tia": 2,
+    "luu_luong_tia_l_s": 2.5,
+    "lang_voi": {"d_lang_mm": 13, "dai_voi_m": 20, "d_voi_mm": 51, "C_voi": 140},
+    "C": 120,
+    "bang_ong": "sch40",
+    "duong_ong": [
+      {"dn": "DN100", "dai_m": 75, "he_so_cuc_bo": 0.2, "_ghi_chu": "trục đứng từ phòng bơm tới tầng trên cùng"},
+      {"dn": "DN65", "dai_m": 12, "he_so_cuc_bo": 0.3, "luu_luong_l_s": 2.5, "_ghi_chu": "nhánh tới họng bất lợi"}
+    ],
+    "chenh_cao_m": 66,
+    "ton_that_khac_bar": 0.2,
+    "so_tang": 20,
+    "chieu_cao_tang_m": 3.3,
+    "cao_do_hong_tang_1_m": 1.25,
+    "ap_luc_max_hong_bar": 4.5,
+    "khoi_luong_ong_m": {"DN100": 160, "DN65": 260}
+  },
+  "phuong_an": [
+    {"ma": "A", "ten": "Trục đứng DN100", "thay_doi": {}},
+    {"ma": "B", "ten": "Trục đứng DN125",
+     "thay_doi": {"duong_ong": [{"dn": "DN125", "dai_m": 75, "he_so_cuc_bo": 0.2},
+                                {"dn": "DN65", "dai_m": 12, "he_so_cuc_bo": 0.3, "luu_luong_l_s": 2.5}],
+                  "khoi_luong_ong_m": {"DN125": 160, "DN65": 260}}},
+    {"ma": "C", "ten": "Trục đứng DN80 (kiểm tra vận tốc)",
+     "thay_doi": {"duong_ong": [{"dn": "DN80", "dai_m": 75, "he_so_cuc_bo": 0.2},
+                                {"dn": "DN65", "dai_m": 12, "he_so_cuc_bo": 0.3, "luu_luong_l_s": 2.5}],
+                  "khoi_luong_ong_m": {"DN80": 160, "DN65": 260}}}
+  ]
+}

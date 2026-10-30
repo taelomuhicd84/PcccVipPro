@@ -1,0 +1,13 @@
+# --- Chung (host) ---
+.DS_Store
+Thumbs.db
+.claude/settings.local.json
+CLAUDE.local.md
+
+# pccc:begin · module pccc v1.0.0 · quản lý bởi pccc/integration/pccc_merge.py
+pccc/**/__pycache__/
+.claude/hooks/pccc/__pycache__/
+*.pccc-bak
+pccc/du-an/*/tmp/
+pccc/.cache/
+# pccc:end

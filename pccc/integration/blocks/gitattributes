@@ -1,0 +1,15 @@
+pccc/** text=auto eol=lf
+.claude/skills/pccc-*/** text eol=lf
+.claude/agents/pccc-*.md text eol=lf
+.claude/hooks/pccc/** text eol=lf
+pccc/memory/*.md merge=union
+pccc/memory/du-an/*.md merge=union
+pccc/**/*.pdf binary
+pccc/**/*.dwg binary
+pccc/**/*.dxf -text
+pccc/**/*.png binary
+pccc/**/*.jpg binary
+pccc/**/*.jpeg binary
+pccc/**/*.webp binary
+pccc/**/*.xlsx binary
+pccc/**/*.docx binary

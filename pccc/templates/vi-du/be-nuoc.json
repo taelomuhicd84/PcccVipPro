@@ -1,0 +1,16 @@
+{
+  "ten": "VÍ DỤ — Dung tích bể nước chữa cháy",
+  "_ghi_chu": "Thời gian chữa cháy của từng hệ PHẢI lấy theo quy chuẩn/tiêu chuẩn áp dụng (xem pccc/knowledge/05-cap-nuoc-chua-chay.md). Số liệu minh họa.",
+  "thong_so": {
+    "thanh_phan": [
+      {"ten": "Họng nước trong nhà", "luu_luong_l_s": 5.0, "thoi_gian_gio": 3, "ghi_chu": "[DC] 3 h theo thực hành TCVN 2622 — đối chiếu"},
+      {"ten": "Sprinkler nhóm 2", "luu_luong_l_s": 30.0, "thoi_gian_phut": 60, "ghi_chu": "[TC] Q; [DC] t"}
+    ],
+    "bu_nuoc_trong_khi_chay_l_s": 0,
+    "kich_thuoc": {"chieu_cao_nuoc_m": 2.5, "khoang_trong_m": 0.3, "ty_le_dai_rong": 2}
+  },
+  "phuong_an": [
+    {"ma": "A", "ten": "Không tính bổ sung nước khi cháy", "thay_doi": {}},
+    {"ma": "B", "ten": "Có nguồn cấp bảo đảm 5 l/s trong khi cháy", "thay_doi": {"bu_nuoc_trong_khi_chay_l_s": 5}}
+  ]
+}

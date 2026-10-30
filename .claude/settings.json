@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(python3 pccc/tools/thuy_luc.py:*)",
+      "Bash(python3 pccc/tools/hut_khoi.py:*)",
+      "Bash(python3 pccc/tools/thoat_nan.py:*)",
+      "Bash(python3 pccc/integration/pccc_doctor.py:*)",
+      "Bash(python3 pccc/integration/pccc_merge.py status:*)",
+      "Bash(python3 pccc/integration/pccc_merge.py plan:*)",
+      "Bash(python3 -m unittest discover -s pccc/tests:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/pccc/run_hook.sh\" session_start",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/pccc/run_hook.sh\" prompt_context",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/pccc/run_hook.sh\" guard_paths",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/pccc/run_hook.sh\" lint_after_write",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

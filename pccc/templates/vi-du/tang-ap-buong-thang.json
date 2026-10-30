@@ -1,0 +1,54 @@
+{
+  "ten": "VÍ DỤ — Tăng áp buồng thang N2, nhà 20 tầng (so sánh xả áp cơ khí và biến tần)",
+  "_ghi_chu": "Δp 20–50 Pa theo QCVN 06:2022 Phụ lục D [TC]; diện tích khe cửa & công thức rò rỉ theo BS EN 12101-6 [QT]. Số liệu minh họa.",
+  "thong_so": {
+    "dp_thiet_ke_pa": 40,
+    "cua_dong": [
+      {
+        "loai": "cua_don_mo_vao_khong_gian_tao_ap",
+        "so_luong": 20
+      },
+      {
+        "loai": "cua_don_mo_ra_khoi_khong_gian_tao_ap",
+        "so_luong": 1
+      }
+    ],
+    "ro_ri_khac_m2": 0.05,
+    "cua_mo": [
+      {
+        "rong_m": 0.9,
+        "cao_m": 2.1,
+        "so_luong": 1
+      }
+    ],
+    "van_toc_qua_cua_mo_m_s": 1.3,
+    "dp_con_lai_khi_mo_pa": 10,
+    "A_ro_ri_cua_dang_mo_m2": 0.01,
+    "ty_le_ro_ri_ong": 0.15,
+    "ap_suat_quat_pa": 400,
+    "cua_kiem_tra_luc": {
+      "rong_m": 0.9,
+      "cao_m": 2.1,
+      "d_m": 0.075,
+      "F_dong_cua_N": 40
+    },
+    "so_quat": 1,
+    "dien_tich_ong_gio_m2": 90,
+    "kiem_soat_ap": "xa_ap"
+  },
+  "phuong_an": [
+    {
+      "ma": "A",
+      "ten": "Quạt cố định + van xả áp trọng lực (barometric)",
+      "thay_doi": {}
+    },
+    {
+      "ma": "B",
+      "ten": "Quạt biến tần + cảm biến chênh áp (không cần xả áp)",
+      "thay_doi": {
+        "kiem_soat_ap": "bien_tan",
+        "ap_suat_quat_pa": 450
+      }
+    }
+  ]
+}

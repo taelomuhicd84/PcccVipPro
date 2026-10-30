@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PcccVipPro — Sơ đồ ghi chú</title>
+<meta name="description" content="Sơ đồ kiến trúc, quy trình thiết kế PCCC 8 bước, bản đồ skill–agent–công cụ, hooks, cơ chế hợp nhất và ghi chú của module PCCC.">
+<style>
+:root {
+  --bg: #f6f5f1; --surface: #ffffff; --surface-2: #f0efe9; --text: #1c2226; --muted: #5a6670;
+  --line: #d5d9dc; --fire: #c2410c; --fire-soft: #fde7da; --water: #0e7490; --water-soft: #dcf2f6;
+  --smoke: #4f46e5; --smoke-soft: #e5e4fb; --ok: #15803d; --ok-soft: #dcf3e3; --warn: #a16207; --warn-soft: #fbf0d0;
+  --bad: #b91c1c; --code-bg: #eceae3; --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121416; --surface: #1b1f22; --surface-2: #23282c; --text: #e7eaec; --muted: #9aa5ad;
+    --line: #333a40; --fire: #fb8a4c; --fire-soft: #3a2116; --water: #4cc3dc; --water-soft: #12303a;
+    --smoke: #a5a1ff; --smoke-soft: #26244a; --ok: #5ad17f; --ok-soft: #17301f; --warn: #e3b341; --warn-soft: #33290f;
+    --bad: #f47171; --code-bg: #262b30; --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121416; --surface: #1b1f22; --surface-2: #23282c; --text: #e7eaec; --muted: #9aa5ad;
+  --line: #333a40; --fire: #fb8a4c; --fire-soft: #3a2116; --water: #4cc3dc; --water-soft: #12303a;
+  --smoke: #a5a1ff; --smoke-soft: #26244a; --ok: #5ad17f; --ok-soft: #17301f; --warn: #e3b341; --warn-soft: #33290f;
+  --bad: #f47171; --code-bg: #262b30; --shadow: none;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif; }
+a { color: var(--water); }
+code, pre, kbd { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; font-size: .88em; }
+code { background: var(--code-bg); padding: .1em .35em; border-radius: 4px; }
+pre { background: var(--code-bg); padding: 12px 14px; border-radius: 8px; overflow-x: auto; margin: 0; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--line); background: var(--surface); }
+header.top .wrap { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 14px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand svg { flex: none; }
+h1 { font-size: 1.35rem; margin: 0; letter-spacing: -.01em; }
+.sub { color: var(--muted); font-size: .9rem; margin: 2px 0 0; }
+button { font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+button:hover { border-color: var(--muted); }
+nav.toc { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: thin; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--muted); font-size: .88rem; padding: 4px 10px; border-radius: 999px; border: 1px solid transparent; }
+nav.toc a:hover { color: var(--text); border-color: var(--line); background: var(--surface); }
+main section { padding: 28px 0 8px; }
+h2 { font-size: 1.15rem; margin: 0 0 4px; display: flex; align-items: baseline; gap: 10px; }
+h2 .num { color: var(--fire); font-variant-numeric: tabular-nums; }
+.lead { color: var(--muted); margin: 0 0 14px; max-width: 72ch; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+.figure { overflow-x: auto; }
+.figure svg { display: block; width: 100%; min-width: 700px; height: auto; }
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; background: var(--surface-2); }
+.table-wrap { overflow-x: auto; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; }
+.t-bg { color: var(--ok); } .t-tc { color: var(--water); } .t-dc { color: var(--warn); } .t-qt { color: var(--smoke); }
+.pa h3 { margin: 0 0 8px; font-size: 1rem; }
+.pa ol { margin: 0; padding-left: 20px; }
+.pa li { margin: 4px 0; }
+.pa .k { color: var(--muted); font-size: .85rem; }
+.note-box textarea { width: 100%; min-height: 180px; resize: vertical; font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.muted { color: var(--muted); font-size: .85rem; }
+footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); margin-top: 32px; padding: 18px 0 32px; }
+/* SVG theme classes */
+.s-box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.s-box2 { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.5; }
+.s-fire { fill: var(--fire-soft); stroke: var(--fire); stroke-width: 1.5; }
+.s-water { fill: var(--water-soft); stroke: var(--water); stroke-width: 1.5; }
+.s-smoke { fill: var(--smoke-soft); stroke: var(--smoke); stroke-width: 1.5; }
+.s-ok { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.5; }
+.s-warn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.5; }
+.s-t { fill: var(--text); font: 600 13px system-ui, sans-serif; }
+.s-m { fill: var(--muted); font: 12px system-ui, sans-serif; }
+.s-c { fill: var(--text); font: 12px ui-monospace, Menlo, Consolas, monospace; }
+.s-f { fill: var(--fire); font: 700 12px system-ui, sans-serif; }
+.s-line { stroke: var(--muted); stroke-width: 1.6; fill: none; }
+.s-dash { stroke: var(--muted); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
+.s-arrow { fill: var(--muted); }
+@media (max-width: 560px) { h1 { font-size: 1.15rem; } .card { padding: 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38" rx="9" class="s-fire"/>
+        <path d="M20 8c2 5 8 8 8 15a8 8 0 0 1-16 0c0-4 2-6 4-8 0 3 1 5 3 5-1-4 0-8 1-12z" fill="var(--fire)"/>
+      </svg>
+      <div>
+        <h1>PcccVipPro — Sơ đồ &amp; ghi chú</h1>
+        <p class="sub">Module <code>pccc</code> v1.0.0 · tri thức rà soát 2026-10-30 · mở file này bằng trình duyệt, chạy offline</p>
+      </div>
+    </div>
+    <button id="theme" type="button" aria-label="Đổi giao diện sáng/tối">Sáng / Tối</button>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Mục lục">
+  <div class="wrap">
+    <a href="#kien-truc">1 · Kiến trúc</a><a href="#quy-trinh">2 · Quy trình 8 bước</a><a href="#ban-do">3 · Skill–Agent–Công cụ</a>
+    <a href="#phuong-an">4 · Phương án mẫu</a><a href="#hooks">5 · Hooks</a><a href="#hop-nhat">6 · Hợp nhất</a>
+    <a href="#van-ban">7 · Văn bản</a><a href="#nhan">8 · Nhãn xác minh</a><a href="#ghi-chu">9 · Ghi chú</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="kien-truc">
+  <h2><span class="num">1</span> Kiến trúc dự án</h2>
+  <p class="lead">File dùng chung ở gốc repo chỉ chứa <b>khối có đánh dấu</b> của module; mọi phần riêng nằm trong không gian tên <code>pccc</code>. Nhờ vậy repo có thể hợp nhất với dự án khác bất cứ lúc nào.</p>
+  <div class="card figure">
+    <svg viewBox="0 0 960 560" role="img" aria-label="Sơ đồ kiến trúc: file dùng chung, bộ não MODULE.md, skill, agent, hook, tri thức, công cụ">
+      <defs><marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-arrow"/></marker></defs>
+      <rect x="20" y="16" width="920" height="118" rx="12" class="s-box2"/>
+      <text x="36" y="40" class="s-t">GỐC REPO — file DÙNG CHUNG (thuộc dự án chủ, mỗi module 1 khối)</text>
+      <g>
+        <rect x="36" y="54" width="140" height="62" rx="8" class="s-box"/><text x="48" y="78" class="s-c">CLAUDE.md</text><rect x="48" y="88" width="88" height="18" rx="9" class="s-fire"/><text x="56" y="101" class="s-f">khối pccc</text>
+        <rect x="186" y="54" width="140" height="62" rx="8" class="s-box"/><text x="198" y="78" class="s-c">STRUCTURE.md</text><rect x="198" y="88" width="88" height="18" rx="9" class="s-fire"/><text x="206" y="101" class="s-f">khối pccc</text>
+        <rect x="336" y="54" width="140" height="62" rx="8" class="s-box"/><text x="348" y="78" class="s-c">MEMORY.md</text><rect x="348" y="88" width="88" height="18" rx="9" class="s-fire"/><text x="356" y="101" class="s-f">khối pccc</text>
+        <rect x="486" y="54" width="140" height="62" rx="8" class="s-box"/><text x="498" y="78" class="s-c">README.md</text><rect x="498" y="88" width="88" height="18" rx="9" class="s-fire"/><text x="506" y="101" class="s-f">khối pccc</text>
+        <rect x="636" y="54" width="130" height="62" rx="8" class="s-box"/><text x="646" y="78" class="s-c">.gitignore</text><text x="646" y="98" class="s-c">.gitattributes</text>
+        <rect x="776" y="54" width="148" height="66" rx="8" class="s-box"/><text x="786" y="74" class="s-c">.claude/</text><text x="786" y="91" class="s-c">settings.json</text><text x="786" y="110" class="s-m">gộp JSON hook/quyền</text>
+      </g>
+      <path d="M106 116 L106 168 L330 168" class="s-line" marker-end="url(#m1)"/>
+      <rect x="332" y="148" width="300" height="74" rx="12" class="s-fire"/>
+      <text x="350" y="174" class="s-t">pccc/MODULE.md — bộ não</text>
+      <text x="350" y="194" class="s-m">vai trò · nguyên tắc vàng · quy trình 8 bước</text>
+      <text x="350" y="211" class="s-m">+ pccc/memory/INDEX.md (ghi nhớ ghim)</text>
+      <path d="M482 222 L482 246" class="s-line"/>
+      <path d="M161 246 L800 246" class="s-line"/>
+      <path d="M161 246 L161 266" class="s-line" marker-end="url(#m1)"/>
+      <path d="M482 246 L482 266" class="s-line" marker-end="url(#m1)"/>
+      <path d="M800 246 L800 266" class="s-line" marker-end="url(#m1)"/>
+      <rect x="36" y="268" width="250" height="118" rx="10" class="s-box"/>
+      <text x="50" y="292" class="s-t">.claude/skills/pccc-* (13)</text>
+      <text x="50" y="312" class="s-m">/pccc-thiet-ke (điều phối)</text>
+      <text x="50" y="330" class="s-m">doc-ban-ve · phan-loai · thoat-nan</text>
+      <text x="50" y="348" class="s-m">ngan-chay · thuy-luc · hut-khoi …</text>
+      <text x="50" y="366" class="s-m">bao-cao · cap-nhat-tri-thuc · hop-nhat</text>
+      <rect x="357" y="268" width="250" height="118" rx="10" class="s-box"/>
+      <text x="371" y="292" class="s-t">.claude/agents/pccc-* (6)</text>
+      <text x="371" y="312" class="s-m">doc-ban-ve · kts-an-toan-chay</text>
+      <text x="371" y="330" class="s-m">ks-cap-nuoc · ks-thong-gio-khoi</text>
+      <text x="371" y="348" class="s-m">ks-dien-bao-chay</text>
+      <text x="371" y="366" class="s-m">tham-dinh (phản biện độc lập)</text>
+      <rect x="676" y="268" width="248" height="118" rx="10" class="s-box"/>
+      <text x="690" y="292" class="s-t">.claude/hooks/pccc/ (4)</text>
+      <text x="690" y="312" class="s-m">session_start · prompt_context</text>
+      <text x="690" y="330" class="s-m">guard_paths · lint_after_write</text>
+      <text x="690" y="348" class="s-m">run_hook.sh: fail-open</text>
+      <text x="690" y="366" class="s-m">tắt: PCCC_HOOKS_DISABLED=1</text>
+      <path d="M161 386 L161 424" class="s-dash" marker-end="url(#m1)"/>
+      <path d="M482 386 L482 424" class="s-dash" marker-end="url(#m1)"/>
+      <rect x="20" y="426" width="920" height="118" rx="12" class="s-box2"/>
+      <text x="36" y="450" class="s-t">pccc/ — phần RIÊNG của module (owned)</text>
+      <rect x="36" y="462" width="176" height="66" rx="8" class="s-ok"/><text x="48" y="486" class="s-c">knowledge/</text><text x="48" y="506" class="s-m">14 file · có nhãn xác minh</text>
+      <rect x="222" y="462" width="196" height="66" rx="8" class="s-water"/><text x="234" y="486" class="s-c">tools/</text><text x="234" y="506" class="s-m">thuy_luc · hut_khoi · thoat_nan</text>
+      <rect x="428" y="462" width="152" height="66" rx="8" class="s-box"/><text x="440" y="486" class="s-c">templates/</text><text x="440" y="506" class="s-m">dữ liệu · báo cáo · ví dụ</text>
+      <rect x="590" y="462" width="160" height="66" rx="8" class="s-box"/><text x="602" y="486" class="s-c">du-an/ · memory/</text><text x="602" y="506" class="s-m">công trình · bộ nhớ</text>
+      <rect x="760" y="462" width="164" height="66" rx="8" class="s-smoke"/><text x="772" y="486" class="s-c">integration/</text><text x="772" y="506" class="s-m">manifest · merge · doctor</text>
+    </svg>
+  </div>
+</section>
+
+<section id="quy-trinh">
+  <h2><span class="num">2</span> Quy trình thiết kế 8 bước</h2>
+  <p class="lead">Gõ <code>/pccc-thiet-ke</code> và gửi bản vẽ. Mỗi hạng mục chưa đạt → ít nhất 2 phương án, có so sánh và khuyến nghị; mọi kết luận dẫn điều khoản kèm nhãn.</p>
+  <div class="card figure">
+    <svg viewBox="0 0 960 300" role="img" aria-label="Luồng 9 bước từ B0 tới B8">
+      <defs><marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-arrow"/></marker></defs>
+      <g>
+        <rect x="16" y="24" width="160" height="92" rx="10" class="s-box"/><text x="30" y="50" class="s-f">B0</text><text x="30" y="72" class="s-t">Tiếp nhận</text><text x="30" y="92" class="s-m">tạo du-an/&lt;mã&gt;/</text>
+        <rect x="204" y="24" width="160" height="92" rx="10" class="s-box"/><text x="218" y="50" class="s-f">B1</text><text x="218" y="72" class="s-t">Đọc bản vẽ</text><text x="218" y="92" class="s-m">pccc-doc-ban-ve</text>
+        <rect x="392" y="24" width="160" height="92" rx="10" class="s-box"/><text x="406" y="50" class="s-f">B2</text><text x="406" y="72" class="s-t">Phân loại</text><text x="406" y="92" class="s-m">F · chiều cao · bậc · S</text>
+        <rect x="580" y="24" width="168" height="92" rx="10" class="s-fire"/><text x="594" y="50" class="s-f">B3</text><text x="594" y="72" class="s-t">Kiến trúc an toàn cháy</text><text x="594" y="92" class="s-m">thoát nạn · ngăn cháy</text><text x="594" y="108" class="s-m">· tiếp cận chữa cháy</text>
+        <rect x="776" y="24" width="168" height="92" rx="10" class="s-water"/><text x="790" y="50" class="s-f">B4</text><text x="790" y="72" class="s-t">Hệ thống</text><text x="790" y="92" class="s-m">nước · khói · báo cháy</text>
+        <rect x="776" y="180" width="168" height="92" rx="10" class="s-warn"/><text x="790" y="206" class="s-f">B5</text><text x="790" y="228" class="s-t">Phương án</text><text x="790" y="248" class="s-m">≥2 PA · so sánh · tối ưu</text>
+        <rect x="580" y="180" width="168" height="92" rx="10" class="s-smoke"/><text x="594" y="206" class="s-f">B6</text><text x="594" y="228" class="s-t">Rà soát chéo</text><text x="594" y="248" class="s-m">agent pccc-tham-dinh</text>
+        <rect x="392" y="180" width="160" height="92" rx="10" class="s-box"/><text x="406" y="206" class="s-f">B7</text><text x="406" y="228" class="s-t">Báo cáo</text><text x="406" y="248" class="s-m">pccc-bao-cao</text>
+        <rect x="204" y="180" width="160" height="92" rx="10" class="s-ok"/><text x="218" y="206" class="s-f">B8</text><text x="218" y="228" class="s-t">Ghi nhớ</text><text x="218" y="248" class="s-m">pccc/memory/</text>
+      </g>
+      <path d="M176 70 L202 70" class="s-line" marker-end="url(#m2)"/>
+      <path d="M364 70 L390 70" class="s-line" marker-end="url(#m2)"/>
+      <path d="M552 70 L578 70" class="s-line" marker-end="url(#m2)"/>
+      <path d="M748 70 L774 70" class="s-line" marker-end="url(#m2)"/>
+      <path d="M860 116 L860 178" class="s-line" marker-end="url(#m2)"/>
+      <path d="M776 226 L750 226" class="s-line" marker-end="url(#m2)"/>
+      <path d="M580 226 L554 226" class="s-line" marker-end="url(#m2)"/>
+      <path d="M392 226 L366 226" class="s-line" marker-end="url(#m2)"/>
+      <path d="M664 180 C 664 150, 860 150, 860 120" class="s-dash" marker-end="url(#m2)"/>
+      <text x="512" y="152" class="s-m">phát hiện lỗi → quay lại</text>
+      <text x="16" y="226" class="s-m">công cụ tính:</text>
+      <text x="16" y="246" class="s-c">pccc/tools/*.py</text>
+      <text x="16" y="266" class="s-m">--config · phuong_an · --json</text>
+    </svg>
+  </div>
+</section>
+
+<section id="ban-do">
+  <h2><span class="num">3</span> Bản đồ Skill ↔ Agent ↔ Công cụ ↔ Tri thức</h2>
+  <div class="card table-wrap">
+    <table>
+      <thead><tr><th>Việc</th><th>Skill</th><th>Agent</th><th>Công cụ</th><th>Tri thức</th></tr></thead>
+      <tbody>
+        <tr><td>Điều phối toàn bộ</td><td><code>/pccc-thiet-ke</code></td><td>(gọi các agent)</td><td>—</td><td><code>MODULE.md</code></td></tr>
+        <tr><td>Đọc bản vẽ</td><td><code>/pccc-doc-ban-ve</code></td><td><code>pccc-doc-ban-ve</code></td><td>pdftotext, Read</td><td><code>templates/du-lieu-cong-trinh.json</code></td></tr>
+        <tr><td>Phân loại, hệ thống bắt buộc</td><td><code>/pccc-phan-loai</code></td><td><code>pccc-kts-an-toan-chay</code></td><td><code>thuy_luc.py nhom</code></td><td>01, 02, 11</td></tr>
+        <tr><td>Thoát nạn</td><td><code>/pccc-thoat-nan</code></td><td><code>pccc-kts-an-toan-chay</code></td><td><code>thoat_nan.py</code></td><td>03</td></tr>
+        <tr><td>Ngăn cháy, khoang cháy</td><td><code>/pccc-ngan-chay</code></td><td><code>pccc-kts-an-toan-chay</code></td><td>—</td><td>04</td></tr>
+        <tr><td>Tiếp cận chữa cháy</td><td><code>/pccc-tiep-can-chua-chay</code></td><td><code>pccc-kts-an-toan-chay</code></td><td>—</td><td>10</td></tr>
+        <tr><td>Nước, sprinkler, bể, bơm</td><td><code>/pccc-thuy-luc</code></td><td><code>pccc-ks-cap-nuoc</code></td><td><code>thuy_luc.py</code></td><td>05, 06, 13</td></tr>
+        <tr><td>Hút khói, tăng áp</td><td><code>/pccc-hut-khoi</code></td><td><code>pccc-ks-thong-gio-khoi</code></td><td><code>hut_khoi.py</code></td><td>07</td></tr>
+        <tr><td>Báo cháy, điện, chiếu sáng</td><td><code>/pccc-bao-chay</code></td><td><code>pccc-ks-dien-bao-chay</code></td><td>—</td><td>08, 09</td></tr>
+        <tr><td>Khí, bọt, bếp, bình</td><td><code>/pccc-chua-chay-dac-biet</code></td><td><code>pccc-ks-cap-nuoc</code></td><td>—</td><td>06</td></tr>
+        <tr><td>Rà soát kiểu thẩm định</td><td>—</td><td><code>pccc-tham-dinh</code></td><td>chạy lại công cụ</td><td>12</td></tr>
+        <tr><td>Báo cáo</td><td><code>/pccc-bao-cao</code></td><td>—</td><td>—</td><td><code>templates/bao-cao-phuong-an.md</code></td></tr>
+        <tr><td>Cập nhật tri thức từ bản gốc</td><td><code>/pccc-cap-nhat-tri-thuc</code></td><td>—</td><td>pdftotext</td><td><code>knowledge/nguon/</code></td></tr>
+        <tr><td>Hợp nhất dự án khác</td><td><code>/pccc-hop-nhat</code></td><td>—</td><td><code>pccc_merge.py</code>, <code>pccc_doctor.py</code></td><td><code>integration/HOP_NHAT.md</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="phuong-an">
+  <h2><span class="num">4</span> Ví dụ “nhiều phương án” (thư viện trong kho tri thức)</h2>
+  <p class="lead">Mỗi vấn đề được trả lời bằng 2–3 phương án, lượng hóa bằng công cụ (khóa <code>phuong_an</code>) rồi chọn phương án tối ưu kỹ thuật + chi phí.</p>
+  <div class="grid">
+    <div class="card pa"><h3>🚪 Khoảng cách thoát nạn vượt</h3><ol>
+      <li>Bổ sung buồng thang đầu hồi <span class="k">— triệt để, mất diện tích</span></li>
+      <li>Thang ngoài nhà loại 3 <span class="k">— rẻ, ảnh hưởng mặt đứng</span></li>
+      <li>Tổ chức lại hành lang/ vị trí thang <span class="k">— hợp lý ở thiết kế cơ sở</span></li></ol></div>
+    <div class="card pa"><h3>🧱 Khoang cháy vượt diện tích</h3><ol>
+      <li>Tường ngăn cháy loại 1 + cửa EI 60</li>
+      <li>Màn ngăn cháy tự động tại lỗ mở lớn</li>
+      <li>Drencher làm ranh giới khoang <span class="k">— tăng bể &amp; bơm</span></li></ol></div>
+    <div class="card pa"><h3>💧 Thủy lực sprinkler/ họng nước</h3><ol>
+      <li>Ống nhỏ – bơm lớn <span class="k">— vốn ống thấp</span></li>
+      <li>Tăng cỡ ống chính – bơm nhỏ <span class="k">— giảm kW, điện năng</span></li>
+      <li>K115 / mạng vòng / phân vùng áp lực <span class="k">— tùy quy mô</span></li></ol></div>
+    <div class="card pa"><h3>🌫️ Hút khói hành lang</h3><ol>
+      <li>1 trục đứng tập trung, quạt trên mái</li>
+      <li>2 trục theo khoang khói ở 2 đầu hành lang</li>
+      <li>Thông gió tự nhiên (nếu đủ điều kiện miễn)</li></ol></div>
+    <div class="card pa"><h3>🪜 Tăng áp buồng thang</h3><ol>
+      <li>Quạt cố định + van xả áp trọng lực</li>
+      <li>Biến tần + cảm biến chênh áp (20–50 Pa)</li>
+      <li>Cấp nhiều điểm/ phân đoạn (nhà rất cao)</li></ol></div>
+    <div class="card pa"><h3>⚙️ Trạm bơm</h3><ol>
+      <li>1 điện + 1 diesel + bù áp</li>
+      <li>2 điện (2 nguồn) + bù áp</li>
+      <li>2 điện + 1 diesel + bù áp <span class="k">— tin cậy cao nhất</span></li></ol></div>
+  </div>
+</section>
+
+<section id="hooks">
+  <h2><span class="num">5</span> Vòng đời hook trong một phiên Claude Code</h2>
+  <p class="lead">Mọi hook chạy qua <code>run_hook.sh</code>: thiếu Python hoặc lỗi bất kỳ → bỏ qua, không chặn. Chỉ tác động phần PCCC.</p>
+  <div class="card figure">
+    <svg viewBox="0 0 960 210" role="img" aria-label="Dòng thời gian bốn hook">
+      <defs><marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-arrow"/></marker></defs>
+      <path d="M24 60 L936 60" class="s-line" marker-end="url(#m3)"/>
+      <circle cx="110" cy="60" r="9" class="s-ok"/><circle cx="350" cy="60" r="9" class="s-water"/><circle cx="590" cy="60" r="9" class="s-fire"/><circle cx="830" cy="60" r="9" class="s-smoke"/>
+      <text x="62" y="36" class="s-t">SessionStart</text><text x="300" y="36" class="s-t">UserPromptSubmit</text><text x="548" y="36" class="s-t">PreToolUse</text><text x="784" y="36" class="s-t">PostToolUse</text>
+      <rect x="24" y="86" width="196" height="104" rx="10" class="s-box"/>
+      <text x="36" y="108" class="s-c">session_start.py</text><text x="36" y="128" class="s-m">tóm tắt ≤ 7 dòng: phiên bản,</text><text x="36" y="146" class="s-m">dự án gần đây, tri thức cũ,</text><text x="36" y="164" class="s-m">tích hợp lệch sau git merge</text>
+      <rect x="252" y="86" width="196" height="104" rx="10" class="s-box"/>
+      <text x="264" y="108" class="s-c">prompt_context.py</text><text x="264" y="128" class="s-m">chỉ khi hỏi PCCC/hợp nhất:</text><text x="264" y="146" class="s-m">thêm 1 dòng nhắc quy trình</text><text x="264" y="164" class="s-m">câu hỏi khác: im lặng</text>
+      <rect x="492" y="86" width="196" height="104" rx="10" class="s-box"/>
+      <text x="504" y="108" class="s-c">guard_paths.py</text><text x="504" y="128" class="s-m">chặn sửa tay khối pccc</text><text x="504" y="146" class="s-m">chặn tài sản PCCC thiếu</text><text x="504" y="164" class="s-m">tiền tố pccc- (exit 2)</text>
+      <rect x="732" y="86" width="204" height="104" rx="10" class="s-box"/>
+      <text x="744" y="108" class="s-c">lint_after_write.py</text><text x="744" y="128" class="s-m">frontmatter skill/agent,</text><text x="744" y="146" class="s-m">JSON, Python, CRLF, khối</text><text x="744" y="164" class="s-m">lỗi → báo Claude tự sửa</text>
+    </svg>
+  </div>
+</section>
+
+<section id="hop-nhat">
+  <h2><span class="num">6</span> Hợp nhất với dự án khác — không lỗi</h2>
+  <p class="lead">Phần riêng được sao chép nguyên khối; file dùng chung giữ nội dung dự án kia và chỉ thêm khối PCCC; <code>settings.json</code> được gộp. Nâng cấp sau này dùng logic 3 chiều nên không mất sửa đổi cục bộ.</p>
+  <div class="card figure">
+    <svg viewBox="0 0 960 330" role="img" aria-label="Sơ đồ hợp nhất hai dự án">
+      <defs><marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-arrow"/></marker></defs>
+      <rect x="20" y="20" width="270" height="140" rx="12" class="s-fire"/>
+      <text x="36" y="46" class="s-t">PcccVipPro (module pccc)</text>
+      <text x="36" y="70" class="s-c">pccc/ · .claude/*pccc*</text><text x="36" y="88" class="s-m">→ owned: sao chép nguyên khối</text>
+      <text x="36" y="114" class="s-c">blocks/ · settings.fragment</text><text x="36" y="132" class="s-m">→ nguồn sự thật cho khối/hook</text>
+      <rect x="670" y="20" width="270" height="140" rx="12" class="s-water"/>
+      <text x="686" y="46" class="s-t">Dự án khác (dự án chủ)</text>
+      <text x="686" y="70" class="s-c">CLAUDE.md · README.md …</text><text x="686" y="88" class="s-m">nội dung giữ nguyên 100%</text>
+      <text x="686" y="114" class="s-c">.claude/settings.json</text><text x="686" y="132" class="s-m">hook/quyền/env giữ nguyên</text>
+      <rect x="352" y="56" width="256" height="70" rx="12" class="s-smoke"/>
+      <text x="368" y="84" class="s-t">pccc_merge.py</text><text x="368" y="104" class="s-c">plan → install → doctor</text>
+      <path d="M290 90 L350 90" class="s-line" marker-end="url(#m4)"/>
+      <path d="M670 90 L610 90" class="s-line" marker-end="url(#m4)"/>
+      <path d="M480 126 L480 180" class="s-line" marker-end="url(#m4)"/>
+      <rect x="120" y="182" width="720" height="128" rx="12" class="s-ok"/>
+      <text x="138" y="208" class="s-t">Repo hợp nhất</text>
+      <text x="138" y="232" class="s-c">CLAUDE.md</text><text x="300" y="232" class="s-m">= nội dung dự án khác + 1 khối pccc ở cuối (import MODULE.md)</text>
+      <text x="138" y="254" class="s-c">settings.json</text><text x="300" y="254" class="s-m">= hook/quyền dự án khác + hook/quyền pccc (nhận diện theo đường dẫn)</text>
+      <text x="138" y="276" class="s-c">pccc/ …</text><text x="300" y="276" class="s-m">= module + install-lock.json (băm từng file → nâng cấp 3 chiều)</text>
+      <text x="138" y="298" class="s-c">sau git pull</text><text x="300" y="298" class="s-m">= pccc_merge.py check || pccc_merge.py sync (idempotent)</text>
+    </svg>
+  </div>
+  <div class="grid" style="margin-top:12px">
+    <div class="card"><b>Trước khi hợp nhất</b><pre><code>python3 pccc/integration/pccc_merge.py plan --target ../du-an-khac</code></pre><div class="row"><button type="button" data-copy="python3 pccc/integration/pccc_merge.py plan --target ../du-an-khac">Sao chép</button></div></div>
+    <div class="card"><b>Hợp nhất / nâng cấp</b><pre><code>python3 pccc/integration/pccc_merge.py install --target ../du-an-khac</code></pre><div class="row"><button type="button" data-copy="python3 pccc/integration/pccc_merge.py install --target ../du-an-khac">Sao chép</button></div></div>
+    <div class="card"><b>Sau git merge/pull</b><pre><code>python3 pccc/integration/pccc_merge.py sync
+python3 pccc/integration/pccc_doctor.py --tests</code></pre><div class="row"><button type="button" data-copy="python3 pccc/integration/pccc_merge.py sync && python3 pccc/integration/pccc_doctor.py --tests">Sao chép</button></div></div>
+  </div>
+  <div class="card table-wrap" style="margin-top:12px">
+    <table>
+      <thead><tr><th>Trạng thái file khi nâng cấp</th><th>Hành động</th></tr></thead>
+      <tbody>
+        <tr><td>Chỉ nguồn thay đổi</td><td><code>update</code> — cập nhật</td></tr>
+        <tr><td>Chỉ đích thay đổi</td><td><code>keep-local</code> — giữ sửa đổi của bạn</td></tr>
+        <tr><td>Cả hai thay đổi</td><td><code>conflict</code> — tạo <code>*.pccc-new</code>, gộp tay rồi <code>resolve</code></td></tr>
+        <tr><td>Nhật ký bộ nhớ</td><td><code>union</code> — gộp dòng mới của cả hai bên</td></tr>
+        <tr><td>Bị bỏ ở phiên bản mới</td><td><code>delete</code> (nếu chưa sửa) / <code>orphan</code> (giữ nếu đã sửa)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="van-ban">
+  <h2><span class="num">7</span> Văn bản đang áp dụng (rà soát 2026-10-30)</h2>
+  <div class="card table-wrap">
+    <table>
+      <thead><tr><th>Văn bản</th><th>Vai trò</th><th>Hiệu lực</th><th>Nhãn</th></tr></thead>
+      <tbody>
+        <tr><td>Luật PCCC &amp; CNCH 55/2024/QH15</td><td>Luật khung</td><td>01/07/2025</td><td><span class="tag t-tc">TC</span></td></tr>
+        <tr><td>NĐ 105/2025/NĐ-CP · TT 36/2025/TT-BCA</td><td>Chi tiết thi hành, thẩm định thiết kế về PCCC</td><td>01/07/2025</td><td><span class="tag t-tc">TC</span></td></tr>
+        <tr><td>QCVN 06:2022/BXD + SĐ1:2023</td><td>An toàn cháy cho nhà &amp; công trình</td><td>16/01/2023 · 01/12/2023</td><td><span class="tag t-tc">TC</span></td></tr>
+        <tr><td>QCVN 10:2025/BCA (TT 103/2025/TT-BCA)</td><td>Diện phải trang bị phương tiện/hệ thống — ưu tiên hơn TCVN 3890:2023</td><td>30/12/2025</td><td><span class="tag t-tc">TC</span></td></tr>
+        <tr><td>TCVN 7336:2021</td><td>Sprinkler/ drencher (nước, bọt)</td><td>2021</td><td><span class="tag t-tc">TC</span></td></tr>
+        <tr><td>TCVN 5738:2021 · TCVN 5687:2024</td><td>Báo cháy · thông gió (công thức hút khói)</td><td>—</td><td><span class="tag t-dc">DC</span></td></tr>
+        <tr><td>QCVN 13:2018/BXD</td><td>Gara ô tô (không có “QCVN 13:2023”)</td><td>15/03/2019</td><td><span class="tag t-tc">TC</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="nhan">
+  <h2><span class="num">8</span> Nhãn xác minh số liệu</h2>
+  <div class="grid">
+    <div class="card"><span class="tag t-bg">BG</span> Đã đối chiếu <b>bản gốc</b> (ghi văn bản, mục, trang) — dùng trực tiếp trong hồ sơ.</div>
+    <div class="card"><span class="tag t-tc">TC</span> Xác nhận qua <b>nguồn thứ cấp</b> — dùng thiết kế sơ bộ, mở bản gốc trước khi ký.</div>
+    <div class="card"><span class="tag t-dc">DC</span> Ghi nhớ chuyên môn, <b>cần đối chiếu</b> — không dùng để kết luận cuối.</div>
+    <div class="card"><span class="tag t-qt">QT</span> Tham khảo <b>quốc tế/ thực hành</b> — dùng có lập luận khi quy chuẩn cho phép.</div>
+  </div>
+  <p class="muted">Nâng nhãn lên BG: đặt bản gốc vào <code>pccc/knowledge/nguon/</code> rồi gõ <code>/pccc-cap-nhat-tri-thuc</code>.</p>
+</section>
+
+<section id="ghi-chu">
+  <h2><span class="num">9</span> Ghi chú của bạn</h2>
+  <p class="lead">Ghi nhanh ý tưởng, câu hỏi cho chủ đầu tư, việc cần làm. Lưu trong trình duyệt này (không gửi đi đâu). Muốn lưu lâu dài/ chia sẻ: bấm “Tải về .md” rồi đưa vào <code>pccc/memory/</code> hoặc thư mục dự án.</p>
+  <div class="card note-box">
+    <label for="note" class="muted">Ghi chú</label>
+    <textarea id="note" placeholder="VD: CĐT xác nhận cao độ mặt đường xe chữa cháy −0,700 → chiều cao PCCC 63,5 m…"></textarea>
+    <div class="row">
+      <button type="button" id="dl">Tải về .md</button>
+      <button type="button" id="clear">Xóa ghi chú</button>
+      <span id="state" class="muted" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Module PCCC v1.0.0 · Bản đồ file: <code>pccc/STRUCTURE.md</code> · Bộ não: <code>pccc/MODULE.md</code> · Hợp nhất: <code>pccc/integration/HOP_NHAT.md</code><br>
+    Kết quả của module là công cụ hỗ trợ kỹ thuật; hồ sơ phải được người có chứng chỉ hành nghề kiểm tra, ký và cơ quan có thẩm quyền thẩm định.
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function luu(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function doc(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  var theme = doc("pccc-theme");
+  if (theme === "light" || theme === "dark") root.setAttribute("data-theme", theme);
+  document.getElementById("theme").addEventListener("click", function () {
+    var hien = root.getAttribute("data-theme") ||
+      (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    var moi = hien === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", moi);
+    luu("pccc-theme", moi);
+  });
+  var note = document.getElementById("note"), state = document.getElementById("state"), hen;
+  note.value = doc("pccc-ghi-chu") || "";
+  note.addEventListener("input", function () {
+    clearTimeout(hen);
+    hen = setTimeout(function () { luu("pccc-ghi-chu", note.value); state.textContent = "Đã lưu trong trình duyệt"; }, 400);
+  });
+  document.getElementById("dl").addEventListener("click", function () {
+    var nd = "# Ghi chú PCCC — " + new Date().toISOString().slice(0, 10) + "\n\n" + note.value + "\n";
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([nd], { type: "text/markdown;charset=utf-8" }));
+    a.download = "ghi-chu-pccc.md";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  document.getElementById("clear").addEventListener("click", function () {
+    if (!note.value || confirm("Xóa toàn bộ ghi chú trong trình duyệt này?")) {
+      note.value = ""; luu("pccc-ghi-chu", ""); state.textContent = "Đã xóa";
+    }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (b) {
+    b.addEventListener("click", function () {
+      var t = b.getAttribute("data-copy");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(function () { b.textContent = "Đã chép"; }, function () { b.textContent = "Không chép được"; });
+      } else { b.textContent = "Trình duyệt không hỗ trợ"; }
+      setTimeout(function () { b.textContent = "Sao chép"; }, 1500);
+    });
+  });
+})();
+</script>
+</body>
+</html>

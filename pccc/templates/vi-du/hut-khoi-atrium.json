@@ -1,0 +1,9 @@
+{
+  "ten": "VÍ DỤ — Hút khói sảnh thông tầng: so sánh TCVN 5687 Phụ lục L.2 và NFPA 92",
+  "_ghi_chu": "Chạy: hut_khoi.py phong --config ... và hut_khoi.py nfpa92 --config ... (các khóa không dùng sẽ bị bỏ qua). Số liệu minh họa.",
+  "thong_so": {
+    "Pf_m": 12, "y_m": 3.5, "Ks": 1.0, "t_khoi_C": 300,
+    "Q_kW": 2500, "z_m": 9.0, "t_moi_truong_C": 30, "chieu_day_lop_khoi_duoi_mieng_m": 2.5, "gamma": 1.0,
+    "ap_suat_quat_pa": 500
+  }
+}

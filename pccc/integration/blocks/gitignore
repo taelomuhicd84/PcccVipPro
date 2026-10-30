@@ -1,0 +1,5 @@
+pccc/**/__pycache__/
+.claude/hooks/pccc/__pycache__/
+*.pccc-bak
+pccc/du-an/*/tmp/
+pccc/.cache/

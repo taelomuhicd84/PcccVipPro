@@ -1,0 +1,70 @@
+{
+  "_mo_ta": "Phiếu dữ liệu công trình phục vụ PCCC. Sao chép vào pccc/du-an/<mã>/du-lieu-cong-trinh.json rồi điền. Mỗi giá trị nên có 'nguon' (bản vẽ + vị trí) hoặc 'gia_dinh' (mã GĐ-xx). Giá trị dưới đây là VÍ DỤ minh họa.",
+  "du_an": {
+    "ma": "vi-du-chung-cu",
+    "ten": "Nhà chung cư ví dụ",
+    "dia_diem": "",
+    "chu_dau_tu": "",
+    "giai_doan": "thiết kế cơ sở | thiết kế kỹ thuật | thiết kế bản vẽ thi công | cải tạo",
+    "ngay": "2026-10-30",
+    "ban_ve": [
+      {"ma": "TMB-01", "loai": "tổng mặt bằng", "tep": "input/TMB-01.pdf", "ty_le": "1/500"},
+      {"ma": "MC-01", "loai": "mặt cắt", "tep": "input/MC-01.pdf", "ty_le": "1/100"}
+    ]
+  },
+  "phan_loai_so_bo": {
+    "cong_nang_chinh": {"gia_tri": "F1.3", "nguon": "MB-tang-dien-hinh"},
+    "cong_nang_phu": [{"gia_tri": "F3.1", "vi_tri": "tầng 1-2 thương mại"}, {"gia_tri": "F5.2 gara", "vi_tri": "tầng hầm"}],
+    "chieu_cao_pccc_m": {"gia_tri": 63.5, "cach_tinh": "cao độ mép dưới cửa sổ tầng 20 (+62.800) − mặt đường xe CC (−0.700)", "nguon": "MC-01, TMB-01"},
+    "so_tang_noi": 20,
+    "so_tang_ham": 2,
+    "tang_ky_thuat": ["tum mái"],
+    "khoi_tich_m3": null,
+    "ket_cau": {"loai": "BTCT toàn khối", "vat_lieu_bao_che": "gạch xây, kính", "nguon": "thuyết minh KC"},
+    "bac_chiu_lua_du_kien": "I",
+    "cap_s_du_kien": "S0"
+  },
+  "tang": [
+    {
+      "ten": "Hầm B1",
+      "cao_do_san_m": -3.6,
+      "dien_tich_san_m2": 2400,
+      "cong_nang": "gara ô tô",
+      "so_nguoi": {"gia_tri": 20, "gia_dinh": "GĐ-01"},
+      "thang_bo": [{"ma": "TB1", "loai": "buồng thang", "rong_ban_thang_m": 1.2, "ra_ngoai_truc_tiep": false}],
+      "loi_ra": [{"ma": "C-B1-1", "loai": "cửa buồng thang", "rong_m": 1.0, "chieu_mo": "hướng thoát nạn"}],
+      "ghi_chu": ""
+    },
+    {
+      "ten": "Tầng điển hình 3-20",
+      "cao_do_san_m": 7.8,
+      "dien_tich_san_m2": 1150,
+      "dien_tich_can_ho_m2": 960,
+      "cong_nang": "căn hộ",
+      "so_can_ho": 12,
+      "hanh_lang": {"rong_m": 1.6, "dai_m": 64, "thong_gio_tu_nhien": false},
+      "thang_bo": [{"ma": "TB1", "loai_du_kien": "N2"}, {"ma": "TB2", "loai_du_kien": "N2"}],
+      "do_thi_duong_di": "tinh-toan/duong-di-tang-dien-hinh.json"
+    }
+  ],
+  "tong_mat_bang": {
+    "duong_xe_chua_chay": {"rong_m": 6.0, "chieu_cao_thong_thuy_min_m": 4.5, "duong_cut_dai_m": 0, "nguon": "TMB-01"},
+    "bai_do_xe_chua_chay": "dọc mặt phía Đông",
+    "khoang_cach_nha_lan_can_m": [{"huong": "Bắc", "gia_tri": 12}],
+    "tru_nuoc_ngoai_nha": "chưa thể hiện"
+  },
+  "he_thong_hien_co": {
+    "bao_chay": "chưa có",
+    "sprinkler": "chưa có",
+    "hong_nuoc": "chưa có",
+    "hut_khoi": "chưa có",
+    "tang_ap": "chưa có"
+  },
+  "gia_dinh": [
+    {"ma": "GĐ-01", "noi_dung": "Số người tầng hầm B1 lấy 20 người (lái xe, bảo vệ)", "can_xac_nhan_boi": "chủ đầu tư"}
+  ],
+  "cau_hoi": [
+    "Cao độ mặt đường xe chữa cháy thấp nhất là bao nhiêu?",
+    "Khối thương mại tầng 1-2 kinh doanh mặt hàng gì (để xác định nhóm nguy cơ)?"
+  ]
+}

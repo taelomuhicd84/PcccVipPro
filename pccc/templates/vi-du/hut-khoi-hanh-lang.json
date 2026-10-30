@@ -1,0 +1,26 @@
+{
+  "ten": "VÍ DỤ — Hút khói hành lang chung cư (so sánh 1 trục tập trung và 2 trục theo khoang khói)",
+  "_ghi_chu": "n, Kd PHẢI tra TCVN 5687 Phụ lục L; chiều dài hành lang/1 miệng hút đối chiếu QCVN 06 Phụ lục D. Số liệu minh họa.",
+  "thong_so": {
+    "loai_nha": "nha_o",
+    "B_m": 1.0,
+    "H_m": 2.1,
+    "n": 1.0,
+    "t_khoi_C": 300,
+    "ty_le_ro_ri": 0.15,
+    "chieu_dai_hanh_lang_m": 64,
+    "cau_hinh_hanh_lang": "thang",
+    "van_toc_mieng_m_s": 6,
+    "ap_suat_quat_pa": 650,
+    "so_quat": 1,
+    "dien_tich_ong_gio_m2": 420,
+    "boc_chong_chay_m2": {"EI60": 120},
+    "so_van_hut_khoi": 40
+  },
+  "phuong_an": [
+    {"ma": "A", "ten": "1 trục đứng tập trung giữa nhà + ống ngang 2 phía", "thay_doi": {}},
+    {"ma": "B", "ten": "2 trục đứng ở 2 đầu hành lang (2 khoang khói, mỗi khoang 32 m)",
+     "thay_doi": {"chieu_dai_hanh_lang_m": 32, "so_quat": 2, "ap_suat_quat_pa": 450,
+                  "dien_tich_ong_gio_m2": 560, "boc_chong_chay_m2": {"EI60": 40}, "so_van_hut_khoi": 80}}
+  ]
+}

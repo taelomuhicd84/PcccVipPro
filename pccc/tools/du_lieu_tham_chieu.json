@@ -1,0 +1,117 @@
+{
+  "_mo_ta": "Dữ liệu tham chiếu dùng chung cho công cụ tính toán module PCCC. Mỗi giá trị quy định có nhãn xác minh 'xm': BG (đã đối chiếu bản gốc), TC (xác nhận qua nguồn thứ cấp), DC (ghi nhớ chuyên môn - BẮT BUỘC đối chiếu), QT (tham khảo quốc tế/thực hành), VL (vật lý). Khi đối chiếu được bản gốc, sửa 'xm' thành 'BG' và ghi 'nguon' (văn bản, mục, trang).",
+  "_cap_nhat": "2026-10-30",
+
+  "sprinkler_nhom": {
+    "_nguon": "TCVN 7336:2021 Bảng 2 (thông số sprinkler nước, chiều cao xếp hàng <= 5,5 m) + Phụ lục A (phân nhóm nguy cơ). Thời gian/diện tích/khoảng cách lấy theo TCVN 7336:2003 — phải đối chiếu bản 2021.",
+    "1": {
+      "mo_ta": "Nhóm 1 — nguy cơ cháy thấp (VD: văn phòng, khách sạn, chung cư, bệnh viện... tra Phụ lục A)",
+      "cuong_do_l_s_m2": {"v": 0.08, "xm": "TC"},
+      "luu_luong_min_l_s": {"v": 10, "xm": "TC"},
+      "dien_tich_tinh_toan_m2": {"v": 60, "xm": "DC"},
+      "thoi_gian_phut": {"v": 30, "xm": "DC"},
+      "dien_tich_1_dau_max_m2": {"v": 12, "xm": "DC"},
+      "khoang_cach_max_m": {"v": 4.0, "xm": "DC"}
+    },
+    "2": {
+      "mo_ta": "Nhóm 2 — nguy cơ trung bình (VD: gara ô tô, kho hàng không cháy ở bao bì cháy, ... tra Phụ lục A)",
+      "cuong_do_l_s_m2": {"v": 0.12, "xm": "TC"},
+      "luu_luong_min_l_s": {"v": 30, "xm": "TC"},
+      "dien_tich_tinh_toan_m2": {"v": 120, "xm": "DC"},
+      "thoi_gian_phut": {"v": 60, "xm": "DC"},
+      "dien_tich_1_dau_max_m2": {"v": 12, "xm": "DC"},
+      "khoang_cach_max_m": {"v": 4.0, "xm": "DC"}
+    },
+    "3": {
+      "mo_ta": "Nhóm 3 — nguy cơ cao (tra Phụ lục A)",
+      "cuong_do_l_s_m2": {"v": 0.24, "xm": "TC"},
+      "luu_luong_min_l_s": {"v": 60, "xm": "TC"},
+      "dien_tich_tinh_toan_m2": {"v": 240, "xm": "DC"},
+      "thoi_gian_phut": {"v": 60, "xm": "DC"},
+      "dien_tich_1_dau_max_m2": {"v": 12, "xm": "DC"},
+      "khoang_cach_max_m": {"v": 4.0, "xm": "DC"}
+    },
+    "4.1": {
+      "mo_ta": "Nhóm 4.1 — nguy cơ rất cao (tra Phụ lục A)",
+      "cuong_do_l_s_m2": {"v": 0.30, "xm": "DC"},
+      "luu_luong_min_l_s": {"v": 110, "xm": "DC"},
+      "dien_tich_tinh_toan_m2": {"v": 360, "xm": "DC"},
+      "thoi_gian_phut": {"v": 60, "xm": "DC"},
+      "dien_tich_1_dau_max_m2": {"v": 9, "xm": "DC"},
+      "khoang_cach_max_m": {"v": 3.0, "xm": "DC"}
+    }
+  },
+
+  "ong_thep": {
+    "sch40": {
+      "_nguon": "ASME B36.10M Schedule 40 (đường kính trong = OD - 2*chiều dày) [VL]",
+      "duong_kinh_trong_mm": {
+        "DN15": 15.80, "DN20": 20.93, "DN25": 26.64, "DN32": 35.05, "DN40": 40.89,
+        "DN50": 52.50, "DN65": 62.71, "DN80": 77.93, "DN100": 102.26, "DN125": 128.19,
+        "DN150": 154.05, "DN200": 202.72, "DN250": 254.51, "DN300": 303.23
+      }
+    },
+    "bs1387_m": {
+      "_nguon": "BS 1387 / BS EN 10255 loại Medium (đường kính trong = OD - 2*chiều dày) [VL]",
+      "duong_kinh_trong_mm": {
+        "DN15": 16.1, "DN20": 21.7, "DN25": 27.3, "DN32": 36.0, "DN40": 41.9,
+        "DN50": 53.1, "DN65": 68.9, "DN80": 80.9, "DN100": 105.3, "DN125": 129.7, "DN150": 155.1
+      }
+    }
+  },
+
+  "he_so_C_hazen_williams": {
+    "_nguon": "NFPA 13 (bảng hệ số C) [QT]",
+    "thep_den_hoac_ma_kem_he_uot": 120,
+    "thep_he_kho_hoac_tien_kich_hoat": 100,
+    "inox_dong_cpvc_hdpe": 150,
+    "gang_deo_lot_xi_mang": 140
+  },
+
+  "ro_ri_cua_m2": {
+    "_nguon": "BS EN 12101-6 (diện tích rò rỉ qua khe cửa đóng) [QT] — dùng khi QCVN 06 Phụ lục D không quy định cách tính",
+    "cua_don_mo_vao_khong_gian_tao_ap": 0.01,
+    "cua_don_mo_ra_khoi_khong_gian_tao_ap": 0.02,
+    "cua_doi": 0.03,
+    "cua_tang_thang_may": 0.06
+  },
+
+  "chong_khoi": {
+    "ap_suat_du_min_pa": {"v": 20, "xm": "TC", "nguon": "QCVN 06:2022/BXD Phụ lục D (D.11, D.12)"},
+    "ap_suat_du_max_pa": {"v": 50, "xm": "TC", "nguon": "QCVN 06:2022/BXD Phụ lục D (D.11, D.12)"},
+    "van_toc_qua_cua_mo_m_s": {"v": 1.3, "xm": "DC", "nguon": "QCVN 06:2022 Phụ lục D (khoang đệm/cửa mở) — đối chiếu"},
+    "chieu_dai_hanh_lang_1_mieng_hut_m": {
+      "thang": {"v": 45, "xm": "DC"},
+      "co_goc": {"v": 30, "xm": "DC"},
+      "vong": {"v": 20, "xm": "DC"},
+      "nguon": "QCVN 06:2022 Phụ lục D (gốc SP 7.13130) — đối chiếu"
+    },
+    "khoi_dong_hut_truoc_cap_s": {"v": "20-30", "xm": "DC"},
+    "luc_mo_cua_max_N": {"v": 100, "xm": "QT", "nguon": "BS EN 12101-6 (NFPA 101: 133 N)"},
+    "he_so_cong_thuc_hanh_lang_nha_o": {"v": 3420, "xm": "TC", "nguon": "TCVN 5687:2010 Phụ lục L (kiểm tra TCVN 5687:2024)"},
+    "he_so_cong_thuc_hanh_lang_cong_cong": {"v": 4300, "xm": "TC", "nguon": "TCVN 5687:2010 Phụ lục L (kiểm tra TCVN 5687:2024)"},
+    "he_so_cong_thuc_phong": {"v": 678.8, "xm": "TC", "nguon": "TCVN 5687:2010 Phụ lục L.2 (kiểm tra TCVN 5687:2024)"}
+  },
+
+  "dong_co_tieu_chuan_kw": [0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18.5, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250, 315],
+
+  "mat_do_nguoi_m2_moi_nguoi": {
+    "_nguon": "NFPA 101 / IBC (hệ số tải người) [QT] — ưu tiên số người theo nhiệm vụ thiết kế hoặc quy định chuyên ngành VN",
+    "van_phong": 9.3,
+    "thuong_mai_tang_tret_tang_ham": 2.8,
+    "thuong_mai_tang_khac": 5.6,
+    "nha_hang_ban_ghe": 1.4,
+    "hoi_truong_ghe_roi": 0.65,
+    "khu_dung": 0.46,
+    "lop_hoc": 1.9,
+    "nha_o": 18.6,
+    "kho": 46.5,
+    "san_xuat": 9.3
+  },
+
+  "kha_nang_thong_qua_mm_moi_nguoi": {
+    "_nguon": "NFPA 101 mục 7.3.3.1 [QT] — chỉ dùng để kiểm tra chéo; chiều rộng tối thiểu theo QCVN 06:2022",
+    "cau_thang": 7.6,
+    "mat_bang_cua_hanh_lang": 5.1
+  }
+}

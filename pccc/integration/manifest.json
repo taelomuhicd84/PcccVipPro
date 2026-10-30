@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "module": "pccc",
+  "ten": "PcccVipPro — Trợ lý thiết kế Phòng cháy chữa cháy",
+  "version": "1.0.0",
+  "_mo_ta": "Hợp đồng hợp nhất của module PCCC. 'owned' = đường dẫn module sở hữu hoàn toàn (không file nào ngoài module được nằm ở đây). 'shared' = file dùng chung với dự án khác; module chỉ quản lý KHỐI có đánh dấu (md/hash) hoặc các mục do nó thêm (json). Xem pccc/integration/HOP_NHAT.md.",
+  "owned": [
+    "pccc/",
+    ".claude/skills/pccc-*/",
+    ".claude/agents/pccc-*.md",
+    ".claude/hooks/pccc/"
+  ],
+  "exclude": [
+    "**/__pycache__/**",
+    "**/*.pyc",
+    "**/.pytest_cache/**",
+    "**/*.pccc-bak",
+    "**/*.pccc-new",
+    "pccc/integration/install-lock.json"
+  ],
+  "merge_union": [
+    "pccc/memory/*.md",
+    "pccc/memory/du-an/*.md"
+  ],
+  "shared": [
+    {"path": "CLAUDE.md", "type": "md-block", "source": "pccc/integration/blocks/CLAUDE.md",
+     "tieu_de_khi_tao": "# CLAUDE.md\n\nĐiểm vào của Claude Code cho repo này. Mỗi module chèn một khối có đánh dấu bên dưới — sửa nội dung khối ở nguồn của module, không sửa tay trong khối."},
+    {"path": "STRUCTURE.md", "type": "md-block", "source": "pccc/integration/blocks/STRUCTURE.md",
+     "tieu_de_khi_tao": "# STRUCTURE.md — Bản đồ repo\n\nMỗi module mô tả phần của mình trong một khối có đánh dấu."},
+    {"path": "MEMORY.md", "type": "md-block", "source": "pccc/integration/blocks/MEMORY.md",
+     "tieu_de_khi_tao": "# MEMORY.md — Chỉ mục bộ nhớ dự án\n\nMỗi module trỏ tới bộ nhớ riêng của mình trong một khối có đánh dấu."},
+    {"path": "README.md", "type": "md-block", "source": "pccc/integration/blocks/README.md",
+     "tieu_de_khi_tao": "# README"},
+    {"path": ".gitignore", "type": "hash-block", "source": "pccc/integration/blocks/gitignore"},
+    {"path": ".gitattributes", "type": "hash-block", "source": "pccc/integration/blocks/gitattributes"},
+    {"path": ".claude/settings.json", "type": "json-merge", "source": "pccc/integration/settings.fragment.json"}
+  ],
+  "hook_command_marker": "/.claude/hooks/pccc/",
+  "namespace": {
+    "skill_prefix": "pccc-",
+    "agent_prefix": "pccc-",
+    "hooks_dir": ".claude/hooks/pccc/",
+    "python_module_prefix": "pccc_"
+  },
+  "requires": {"python": "3.8"}
+}

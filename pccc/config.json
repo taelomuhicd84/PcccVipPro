@@ -1,0 +1,18 @@
+{
+  "_mo_ta": "Cấu hình module PCCC (thuộc module). Chỉnh hành vi hook tại đây thay vì sửa .claude/settings.json. guard_namespace: block | warn | off.",
+  "phien_ban_tri_thuc": "2026-10-30",
+  "nhac_ra_soat_tri_thuc_sau_ngay": 180,
+  "hooks": {
+    "session_brief": true,
+    "prompt_context": true,
+    "guard_managed_blocks": true,
+    "guard_namespace": "block",
+    "lint_after_write": true
+  },
+  "mac_dinh": {
+    "so_phuong_an_toi_thieu": 2,
+    "so_phuong_an_khuyen_nghi": 3,
+    "don_vi_tien_te": "VND",
+    "ngon_ngu": "vi"
+  }
+}

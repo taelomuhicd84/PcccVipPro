@@ -1,0 +1,42 @@
+{
+  "_mo_ta": "ĐƠN GIÁ GIẢ ĐỊNH chỉ để SO SÁNH TƯƠNG ĐỐI giữa các phương án. KHÔNG dùng làm dự toán. Thay bằng báo giá thực tế (truyền --don-gia file_cua_ban.json). Xem pccc/knowledge/13-don-gia-tham-khao.md.",
+  "_cap_nhat": "2026-10-30",
+  "don_vi": "VND",
+  "ong_thep_lap_dat_vnd_m": {
+    "DN25": 180000,
+    "DN32": 230000,
+    "DN40": 270000,
+    "DN50": 350000,
+    "DN65": 480000,
+    "DN80": 600000,
+    "DN100": 850000,
+    "DN125": 1150000,
+    "DN150": 1500000,
+    "DN200": 2400000,
+    "DN250": 3300000,
+    "DN300": 4300000
+  },
+  "dau_sprinkler_lap_dat_vnd_cai": 450000,
+  "bom_dien_tron_bo_vnd_kw": 10000000,
+  "bom_diesel_tron_bo_vnd_kw": 22000000,
+  "bom_bu_ap_tron_bo_vnd": 45000000,
+  "dien_nang_vnd_kwh": 3000,
+  "gio_chay_thu_nam": 26,
+  "so_nam_vong_doi": 20,
+  "be_nuoc_btct_vnd_m3": 3500000,
+  "be_thep_lap_ghep_vnd_m3": 4500000,
+  "ong_gio_ton_ma_kem_vnd_m2": 450000,
+  "boc_chong_chay_ong_gio_vnd_m2": {
+    "EI30": 900000,
+    "EI60": 1300000,
+    "EI120": 2000000,
+    "EI150": 2400000
+  },
+  "quat_hut_khoi_vnd_kw": 18000000,
+  "quat_tang_ap_vnd_kw": 12000000,
+  "van_hut_khoi_vnd_cai": 6500000,
+  "van_ngan_chay_vnd_cai": 4500000,
+  "van_xa_ap_vnd_m2": 60000000,
+  "bien_tan_vnd_kw": 3500000,
+  "cam_bien_chenh_ap_vnd": 12000000
+}

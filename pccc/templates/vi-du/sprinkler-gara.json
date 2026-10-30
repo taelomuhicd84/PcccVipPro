@@ -1,0 +1,31 @@
+{
+  "ten": "VÍ DỤ — Sprinkler tầng hầm gara (nhóm 2), so sánh 3 phương án cỡ ống",
+  "_ghi_chu": "File mẫu cho thuy_luc.py sprinkler. Số liệu hình học là giả định minh họa. 'phuong_an' ghi đè các khóa của 'thong_so'.",
+  "thong_so": {
+    "nhom": "2",
+    "k_factor": 80,
+    "ap_luc_min_dau_bar": 0.5,
+    "khoang_cach_dau_tren_nhanh_m": 3.4,
+    "khoang_cach_giua_nhanh_m": 3.4,
+    "C": 120,
+    "bang_ong": "sch40",
+    "he_so_phu_kien": 1.1,
+    "ong_nhanh": ["DN25", "DN25", "DN32", "DN32", "DN40"],
+    "ong_nhanh_ket_noi": {"dn": "DN40", "dai_m": 1.7, "chenh_cao_m": 0.0},
+    "ong_chinh_nhanh": "DN65",
+    "ong_cap": {"dn": "DN100", "dai_tuong_duong_m": 90},
+    "chenh_cao_m": 4.5,
+    "ton_that_cum_van_bar": 0.3,
+    "luu_luong_bo_sung_l_s": 0,
+    "so_dau_toan_he": 620,
+    "khoi_luong_ong_m": {"DN25": 1500, "DN32": 900, "DN40": 600, "DN65": 450, "DN100": 300}
+  },
+  "phuong_an": [
+    {"ma": "A", "ten": "Ống chính nhánh DN65, ống cấp DN100 (ống nhỏ, bơm lớn)", "thay_doi": {}},
+    {"ma": "B", "ten": "Ống chính nhánh DN80, ống cấp DN125",
+     "thay_doi": {"ong_chinh_nhanh": "DN80", "ong_cap": {"dn": "DN125", "dai_tuong_duong_m": 90},
+                  "khoi_luong_ong_m": {"DN25": 1500, "DN32": 900, "DN40": 600, "DN80": 450, "DN125": 300}}},
+    {"ma": "C", "ten": "Như A nhưng đầu phun K115 (giảm số đầu nhờ tăng khoảng cách tới 3,4 x 3,5 m)",
+     "thay_doi": {"k_factor": 115, "khoang_cach_giua_nhanh_m": 3.5, "so_dau_toan_he": 600}}
+  ]
+}
